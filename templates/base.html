@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
   <header class="topbar">
     <nav class="nav">
-      <a class="brand" href="{{ url_for('index') }}">ScamTrace<span>詐騙對話話術分析</span></a>
+      <a class="brand" href="{{ url_for('index') }}"><span class="brand-dot" aria-hidden="true"></span>ScamTrace<span>詐騙對話話術分析</span></a>
       <div class="nav-links">
         <a href="{{ url_for('demo_list') }}">示範案例</a>
         {% if g.user %}

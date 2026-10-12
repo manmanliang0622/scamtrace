@@ -1,34 +1,70 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="hero">
-  <h1>看出對話在哪裡開始變調</h1>
-  <p>詐騙很少只有一則訊息，而是經過數天的聊天、建立信任，才轉到要求匯款或提供資料。
-     ScamTrace 分析整段 LINE 對話，逐則標出對方使用的說服手法，畫出風險時間軸，並指出開始要求金錢或資料的「轉折點」。</p>
-  <div class="hero-actions">
-    {% if g.user %}<a class="btn" href="{{ url_for('case_new') }}">上傳對話</a>
-    {% else %}<a class="btn" href="{{ url_for('auth.register') }}">註冊後開始使用</a>{% endif %}
-    <a class="btn secondary" href="{{ url_for('demo_list') }}">先看示範案例</a>
+<section class="intro">
+  <div class="intro-text">
+    <h1>逐則標出詐騙對話裡的<br>說服手法</h1>
+    <p class="lead">上傳整段 LINE 對話，系統會標出對方每則訊息用了哪種說服手法、目前在哪個階段，並指出開始要求金錢或資料的那一則。</p>
+    <div class="hero-actions">
+      {% if g.user %}<a class="btn" href="{{ url_for('case_new') }}">上傳對話</a>
+      {% else %}<a class="btn" href="{{ url_for('auth.register') }}">註冊後開始使用</a>{% endif %}
+      <a class="btn bracket" href="{{ url_for('demo_list') }}">看示範案例</a>
+    </div>
+  </div>
+
+  {# 示範對話「假投資：飆股老師帶單」35 則訊息的實際風險分數（規則比對），座標由資料庫數值換算 #}
+  <figure class="intro-chart">
+    <svg viewBox="0 0 540 300" role="img" aria-label="示範案例的風險變化：第 14 則為轉折點，第 23 則風險最高">
+      <g class="ax">
+        <line x1="40" y1="30" x2="40" y2="250"/><line x1="40" y1="250" x2="500" y2="250"/>
+        <line class="grid" x1="40" y1="96" x2="500" y2="96"/>
+        <text x="32" y="254" text-anchor="end">0</text><text x="32" y="100" text-anchor="end">70</text><text x="32" y="34" text-anchor="end">100</text>
+        <text x="40" y="272">#1</text><text x="500" y="272" text-anchor="end">#35</text>
+        <text class="ax-title" x="270" y="290" text-anchor="middle">訊息序號</text>
+        <text class="ax-title" x="40" y="16" text-anchor="middle">風險</text>
+      </g>
+      <polyline class="curve" points="40.0,217.0 53.5,250.0 67.1,250.0 80.6,250.0 94.1,250.0 107.6,250.0 121.2,217.0 134.7,217.0 148.2,250.0 161.8,239.0 175.3,250.0 188.8,217.0 202.4,250.0 215.9,107.0 229.4,250.0 242.9,250.0 256.5,250.0 270.0,250.0 283.5,250.0 297.1,107.0 310.6,250.0 324.1,217.0 337.6,74.0 351.2,107.0 364.7,250.0 378.2,250.0 391.8,250.0 405.3,250.0 418.8,250.0 432.4,250.0 445.9,250.0 459.4,107.0 472.9,184.0 486.5,250.0 500.0,184.0"/>
+      <line class="tp-line" x1="215.9" y1="30" x2="215.9" y2="250"/>
+      <circle class="tp-dot" cx="215.9" cy="107" r="4.5"/>
+      <circle class="peak-dot" cx="337.6" cy="74" r="4"/>
+      <g class="chip dark"><rect x="96" y="40" width="112" height="22"/><text x="152" y="55" text-anchor="middle">轉折點 #14</text></g>
+      <g class="chip light"><rect x="350" y="40" width="112" height="22"/><text x="406" y="55" text-anchor="middle">最高風險 #23・80</text></g>
+    </svg>
+    <figcaption><span class="mono">示範案例 01</span>假投資：飆股老師帶單，35 則訊息（規則比對）</figcaption>
+  </figure>
+</section>
+
+<section class="split">
+  <div><p class="label">01 · 標註</p><h2>每則訊息標出手法與依據</h2></div>
+  <div class="sample">
+    <div class="sample-msg"><span class="sample-meta">#7 對方A</span>我在券商待了十五年，現在是證照分析師，專業的事交給專業的人<span class="tag" style="--tag:#2e4b78">權威</span></div>
+    <div class="sample-msg"><span class="sample-meta">#8 對方A</span>群組裡大家都賺了，這是學員分享的對帳單<span class="tag" style="--tag:#3d6b76">社會認同</span></div>
+    <div class="sample-msg turning"><span class="sample-meta">#14 對方A　<b>要求行動・轉折點</b></span>加我助理的 LINE ID：<span class="code">[LINEID1]</span>，她會拉您進群</div>
   </div>
 </section>
 
-<section class="steps">
-  <div class="card step"><span class="step-no">1</span><h2>上傳</h2><p>上傳 LINE 匯出的 .txt 聊天紀錄，或直接貼上文字，並選出哪個名字是你。</p></div>
-  <div class="card step"><span class="step-no">2</span><h2>確認去識別化</h2><p>電話、帳號、身分證等個資先在本機換成代號。你可以檢查、補遮，確認後才送出。</p></div>
-  <div class="card step"><span class="step-no">3</span><h2>看分析</h2><p>每則訊息的說服手法與依據字句、詐騙階段、風險時間軸與轉折點。</p></div>
+<section class="split">
+  <div><p class="label">02 · 流程</p><h2>使用流程</h2></div>
+  <ol class="flow-list">
+    <li><b>上傳</b>LINE 匯出的 .txt 聊天紀錄，或直接貼上文字，並選出哪個名字是你。</li>
+    <li><b>確認去識別化</b>電話、帳號、身分證等個資先在本機換成代號，你可以檢查、補遮，確認後才送出。</li>
+    <li><b>看分析</b>每則訊息的說服手法與依據字句、詐騙階段、風險時間軸與轉折點。</li>
+  </ol>
 </section>
 
-<section class="card privacy">
-  <h2>隱私怎麼處理</h2>
-  <ul>
-    <li>原始對話只在上傳那一次處理，不寫入資料庫，也不送出本機。</li>
-    <li>資料庫與語言模型只看得到遮罩後的文字；同一個帳號會一直使用同一個代號，方便判斷是否反覆出現。</li>
-    <li>金額與網址的網域會保留，因為它們是判斷詐騙的重要線索。</li>
-    <li>你可以隨時刪除自己的案例，相關訊息、標註與回饋會一併刪除。</li>
-  </ul>
+<section class="split">
+  <div><p class="label">03 · 隱私</p><h2>隱私怎麼處理</h2></div>
+  <div class="dark-card">
+    <ul>
+      <li>原始對話只在上傳那一次處理，不寫入資料庫，也不送出本機。</li>
+      <li>資料庫與語言模型只看得到遮罩後的文字；同一個帳號會一直使用同一個代號，方便判斷是否反覆出現。</li>
+      <li>金額與網址的網域會保留，因為它們是判斷詐騙的重要線索。</li>
+      <li>你可以隨時刪除自己的案例，相關訊息、標註與回饋會一併刪除。</li>
+    </ul>
+  </div>
 </section>
 
-<section>
-  <h2>示範案例</h2>
-  {% include "_demo_cards.html" %}
+<section class="split">
+  <div><p class="label">04 · 示範</p><h2>示範案例</h2></div>
+  <div>{% include "_demo_cards.html" %}</div>
 </section>
 {% endblock %}
