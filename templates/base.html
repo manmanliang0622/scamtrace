@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %}{% if self.title() %}｜{% endif %}詐騙對話話術分析系統</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="{{ url_for('index') }}">ScamTrace<span>詐騙對話話術分析</span></a>
+      <div class="nav-links">
+        <a href="{{ url_for('demo_list') }}">示範案例</a>
+        {% if g.user %}
+          <a href="{{ url_for('cases_list') }}">我的案例</a>
+          <a href="{{ url_for('case_new') }}">上傳</a>
+          {% if g.user.role == 'admin' %}<a href="{{ url_for('admin_dashboard') }}">後台</a>{% endif %}
+          <form method="post" action="{{ url_for('auth.logout') }}" class="inline">
+            <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+            <button type="submit" class="linklike">登出（{{ g.user.username }}）</button>
+          </form>
+        {% else %}
+          <a href="{{ url_for('auth.login') }}">登入</a>
+          <a href="{{ url_for('auth.register') }}">註冊</a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}" role="status">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    本系統僅供參考，若有疑慮請撥打 <strong>165 反詐騙專線</strong>。
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

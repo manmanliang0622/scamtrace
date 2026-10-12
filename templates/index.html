@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>看出對話在哪裡開始變調</h1>
+  <p>詐騙很少只有一則訊息，而是經過數天的聊天、建立信任，才轉到要求匯款或提供資料。
+     ScamTrace 分析整段 LINE 對話，逐則標出對方使用的說服手法，畫出風險時間軸，並指出開始要求金錢或資料的「轉折點」。</p>
+  <div class="hero-actions">
+    {% if g.user %}<a class="btn" href="{{ url_for('case_new') }}">上傳對話</a>
+    {% else %}<a class="btn" href="{{ url_for('auth.register') }}">註冊後開始使用</a>{% endif %}
+    <a class="btn secondary" href="{{ url_for('demo_list') }}">先看示範案例</a>
+  </div>
+</section>
+
+<section class="steps">
+  <div class="card step"><span class="step-no">1</span><h2>上傳</h2><p>上傳 LINE 匯出的 .txt 聊天紀錄，或直接貼上文字，並選出哪個名字是你。</p></div>
+  <div class="card step"><span class="step-no">2</span><h2>確認去識別化</h2><p>電話、帳號、身分證等個資先在本機換成代號。你可以檢查、補遮，確認後才送出。</p></div>
+  <div class="card step"><span class="step-no">3</span><h2>看分析</h2><p>每則訊息的說服手法與依據字句、詐騙階段、風險時間軸與轉折點。</p></div>
+</section>
+
+<section class="card privacy">
+  <h2>隱私怎麼處理</h2>
+  <ul>
+    <li>原始對話只在上傳那一次處理，不寫入資料庫，也不送出本機。</li>
+    <li>資料庫與語言模型只看得到遮罩後的文字；同一個帳號會一直使用同一個代號，方便判斷是否反覆出現。</li>
+    <li>金額與網址的網域會保留，因為它們是判斷詐騙的重要線索。</li>
+    <li>你可以隨時刪除自己的案例，相關訊息、標註與回饋會一併刪除。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>示範案例</h2>
+  {% include "_demo_cards.html" %}
+</section>
+{% endblock %}

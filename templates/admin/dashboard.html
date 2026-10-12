@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}後台儀表板{% endblock %}
+{% macro pct(x) %}{{ '—' if x is none else ('%.0f%%' % (x * 100)) }}{% endmacro %}
+{% macro barlist(items, label_key, max_n) %}
+  <ul class="bars">
+    {% for it in items %}
+      <li>
+        <span class="bar-label">{{ it[label_key] }}</span>
+        <span class="bar-track"><span class="bar" style="width: {{ (it.count / max_n * 100) | round(1) if max_n else 0 }}%"></span></span>
+        <span class="bar-n">{{ it.count }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+{% block content %}
+<div class="case-head">
+  <h1>後台儀表板</h1>
+  <a class="btn secondary" href="{{ url_for('admin_audit') }}">操作日誌</a>
+</div>
+
+<section class="kpis">
+  <div class="card kpi"><span class="kpi-label">已分析案例</span><span class="kpi-value">{{ s.overview.total }}</span></div>
+  <div class="card kpi"><span class="kpi-label">高風險比例</span><span class="kpi-value">{{ pct(s.overview.high_ratio if s.overview.total else none) }}</span><span class="muted small">{{ s.overview.high }} 件</span></div>
+  <div class="card kpi"><span class="kpi-label">轉折點平均位置</span><span class="kpi-value">{{ ('第 %.1f 則' % s.turning_point.avg) if s.turning_point.avg else '—' }}</span><span class="muted small">{{ s.turning_point.count }} 件有轉折點</span></div>
+  <div class="card kpi"><span class="kpi-label">回饋正確率</span><span class="kpi-value">{{ pct(s.feedback.overall.accuracy) }}</span><span class="muted small">{{ s.feedback.overall.count }} 筆回饋</span></div>
+  <div class="card kpi"><span class="kpi-label">分析方式</span><span class="kpi-value small-value">模型 {{ s.methods.llm }}／規則 {{ s.methods.rule }}</span></div>
+</section>
+
+<div class="admin-grid">
+  <section class="card">
+    <h2>各手法出現頻率</h2>
+    {{ barlist(s.tactics, 'name', s.tactics[0].count if s.tactics else 0) }}
+  </section>
+  <section class="card">
+    <h2>最常一起出現的手法組合（前 10 名）</h2>
+    {% if s.pairs %}
+      <ol class="pairs">{% for p in s.pairs %}<li>{{ p.a }}＋{{ p.b }}<span class="muted">（{{ p.count }}）</span></li>{% endfor %}</ol>
+    {% else %}<p class="muted">尚無資料。</p>{% endif %}
+  </section>
+  <section class="card">
+    <h2>詐騙類型分布</h2>
+    {{ barlist(s.scam_types, 'name', s.scam_types[0].count if s.scam_types else 0) }}
+  </section>
+  <section class="card">
+    <h2>各手法回饋正確率</h2>
+    {% if s.feedback.per_tactic %}
+      <table class="table compact">
+        <thead><tr><th>手法</th><th class="num">回饋數</th><th class="num">正確率</th></tr></thead>
+        {% for r in s.feedback.per_tactic %}<tr><td>{{ r.name }}</td><td class="num">{{ r.count }}</td><td class="num">{{ pct(r.accuracy) }}</td></tr>{% endfor %}
+      </table>
+    {% else %}<p class="muted">尚無逐則回饋。</p>{% endif %}
+  </section>
+</div>
+
+<section class="card">
+  <h2>案例與示範設定</h2>
+  <div class="table-wrap">
+  <table class="table compact">
+    <thead><tr><th>ID</th><th>標題</th><th>使用者</th><th>風險</th><th>建立時間</th><th>示範</th></tr></thead>
+    {% for c in cases %}
+      <tr>
+        <td>{{ c.id }}</td>
+        <td><a href="{{ url_for('case_detail', case_id=c.id) }}">{{ c.title }}</a></td>
+        <td>{{ c.username }}</td>
+        <td>{% if c.risk_level %}<span class="level level-{{ c.risk_level }}">{{ RISK_LEVEL_NAMES[c.risk_level] }}</span>{% else %}{{ c.status }}{% endif %}</td>
+        <td class="nowrap">{{ c.created_at[:16] | replace('T', ' ') }}</td>
+        <td>
+          <form method="post" action="{{ url_for('admin_toggle_demo', case_id=c.id) }}">
+            <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+            <input type="hidden" name="is_demo" value="{{ '0' if c.is_demo else '1' }}">
+            <button type="submit" class="linklike">{{ '取消示範' if c.is_demo else '設為示範' }}</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  </div>
+</section>
+{% endblock %}

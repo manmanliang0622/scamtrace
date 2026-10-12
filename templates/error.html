@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}錯誤 {{ code }}{% endblock %}
+{% block content %}
+<section class="card narrow error-page">
+  <p class="error-code">{{ code }}</p>
+  <h1>{{ title }}</h1>
+  <p>{{ message }}</p>
+  <p><a class="btn" href="{{ url_for('index') }}">回首頁</a></p>
+</section>
+{% endblock %}

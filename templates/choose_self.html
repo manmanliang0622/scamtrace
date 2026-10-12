@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}選擇你的名字{% endblock %}
+{% block content %}
+<h1>哪個名字是你？</h1>
+<p>共解析出 <strong>{{ count }}</strong> 則訊息。請選擇你在這段對話中的名字，其他人會顯示為「對方A」「對方B」。</p>
+{% for w in warnings %}<div class="flash flash-warning" role="status">{{ w }}</div>{% endfor %}
+<form method="post" enctype="multipart/form-data" class="card">
+  <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+  <input type="hidden" name="source_type" value="{{ source_type }}">
+  <textarea name="raw_text" hidden>{{ raw_text }}</textarea>
+  <input type="hidden" name="title" value="{{ request.form.get('title', '') }}">
+  <fieldset class="choice">
+    <legend>我的名字</legend>
+    {% for name in speakers %}
+      <label class="radio"><input type="radio" name="self_name" value="{{ name }}" required> {{ name }}</label>
+    {% endfor %}
+  </fieldset>
+  <button type="submit" class="btn">下一步：去識別化預覽</button>
+</form>
+{% endblock %}

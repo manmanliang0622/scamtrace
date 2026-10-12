@@ -1,0 +1,130 @@
+{
+  "title": "正常對話：同學討論作業",
+  "self_name": "鄭宇翔",
+  "category": "normal",
+  "is_scam": false,
+  "scam_type": null,
+  "turning_point": null,
+  "pii": [
+    {
+      "type": "email",
+      "value": "yuxiang.cheng@example.edu.tw"
+    },
+    {
+      "type": "url",
+      "value": "https://docs.google.com/document/d/1AbCdEfGhIjK/edit?usp=sharing"
+    }
+  ],
+  "messages": {
+    "1": {
+      "stage": "none",
+      "tactics": []
+    },
+    "2": {
+      "stage": "none",
+      "tactics": []
+    },
+    "3": {
+      "stage": "none",
+      "tactics": []
+    },
+    "4": {
+      "stage": "none",
+      "tactics": []
+    },
+    "5": {
+      "stage": "none",
+      "tactics": []
+    },
+    "6": {
+      "stage": "none",
+      "tactics": []
+    },
+    "7": {
+      "stage": "none",
+      "tactics": []
+    },
+    "8": {
+      "stage": "none",
+      "tactics": []
+    },
+    "9": {
+      "stage": "none",
+      "tactics": []
+    },
+    "10": {
+      "stage": "none",
+      "tactics": []
+    },
+    "11": {
+      "stage": "none",
+      "tactics": []
+    },
+    "12": {
+      "stage": "none",
+      "tactics": []
+    },
+    "13": {
+      "stage": "none",
+      "tactics": []
+    },
+    "14": {
+      "stage": "none",
+      "tactics": []
+    },
+    "15": {
+      "stage": "none",
+      "tactics": []
+    },
+    "16": {
+      "stage": "none",
+      "tactics": []
+    },
+    "17": {
+      "stage": "none",
+      "tactics": []
+    },
+    "18": {
+      "stage": "none",
+      "tactics": []
+    },
+    "19": {
+      "stage": "none",
+      "tactics": []
+    },
+    "20": {
+      "stage": "none",
+      "tactics": []
+    },
+    "21": {
+      "stage": "none",
+      "tactics": []
+    },
+    "22": {
+      "stage": "none",
+      "tactics": []
+    },
+    "23": {
+      "stage": "none",
+      "tactics": []
+    },
+    "24": {
+      "stage": "none",
+      "tactics": []
+    },
+    "25": {
+      "stage": "none",
+      "tactics": []
+    },
+    "26": {
+      "stage": "none",
+      "tactics": []
+    }
+  },
+  "source": {
+    "title": "自編正常對話（對照組，無參考來源）",
+    "url": "",
+    "retrieved": ""
+  },
+  "_note": "草稿：stage / tactics / turning_point 由開發者人工標註"
+}

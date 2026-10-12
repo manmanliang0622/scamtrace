@@ -1,0 +1,148 @@
+{
+  "title": "假冒檢警：健保卡遭盜用與監管帳戶",
+  "self_name": "李美華",
+  "category": "impersonation_official",
+  "is_scam": true,
+  "scam_type": "impersonation_official",
+  "turning_point": 18,
+  "pii": [
+    {
+      "type": "phone",
+      "value": "0800-123-456"
+    },
+    {
+      "type": "id_number",
+      "value": "B220456789"
+    },
+    {
+      "type": "bank_account",
+      "value": "60210098765432"
+    },
+    {
+      "type": "url",
+      "value": "https://www.tpc-judicial.gov-tw.cc/case/query?id=1130888"
+    }
+  ],
+  "messages": {
+    "1": {
+      "stage": "contact",
+      "tactics": []
+    },
+    "2": {
+      "stage": "none",
+      "tactics": []
+    },
+    "3": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "4": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "5": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "6": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "7": {
+      "stage": "setup",
+      "tactics": [
+        "authority"
+      ]
+    },
+    "8": {
+      "stage": "none",
+      "tactics": []
+    },
+    "9": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "10": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "11": {
+      "stage": "none",
+      "tactics": []
+    },
+    "12": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "13": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "14": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "15": {
+      "stage": "none",
+      "tactics": []
+    },
+    "16": {
+      "stage": "setup",
+      "tactics": [
+        "authority",
+        "urgency_threat"
+      ]
+    },
+    "17": {
+      "stage": "setup",
+      "tactics": [
+        "authority"
+      ]
+    },
+    "18": {
+      "stage": "action",
+      "tactics": []
+    },
+    "19": {
+      "stage": "none",
+      "tactics": []
+    },
+    "20": {
+      "stage": "pressure",
+      "tactics": [
+        "authority",
+        "urgency_threat"
+      ]
+    },
+    "21": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    },
+    "22": {
+      "stage": "none",
+      "tactics": []
+    },
+    "23": {
+      "stage": "pressure",
+      "tactics": []
+    },
+    "24": {
+      "stage": "none",
+      "tactics": []
+    },
+    "25": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    }
+  },
+  "source": {
+    "title": "165 全民防騙網（內政部警政署）",
+    "url": "https://165.npa.gov.tw/",
+    "retrieved": "2026-10-09"
+  },
+  "_note": "草稿：stage / tactics / turning_point 由開發者人工標註"
+}

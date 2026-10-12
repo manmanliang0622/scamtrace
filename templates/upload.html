@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}上傳對話{% endblock %}
+{% block content %}
+<h1>上傳對話</h1>
+<p class="muted">檔案只在這次請求中解析；個資會先換成代號，原文不會存進資料庫，也不會送出本機。</p>
+
+<details class="card help">
+  <summary>如何匯出 LINE 聊天紀錄</summary>
+  <ol>
+    <li>打開要分析的 LINE 聊天室，點右上角「≡」選單。</li>
+    <li>點「設定」→「傳送聊天紀錄」（iPhone）或「匯出聊天記錄」（Android）。</li>
+    <li>選擇儲存成檔案（.txt），存到手機或傳到電腦。</li>
+    <li>回到這裡選擇該 .txt 檔上傳。</li>
+  </ol>
+  <p class="muted">請只上傳你自己參與的對話。若對話內容涉及他人隱私，建議先取得同意。</p>
+</details>
+
+<form method="post" enctype="multipart/form-data" class="card" id="upload-form">
+  <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+  <fieldset class="choice">
+    <legend>選擇一種方式</legend>
+    <label class="radio"><input type="radio" name="mode" value="file" checked> 上傳 LINE 匯出的 .txt 檔</label>
+    <label class="radio"><input type="radio" name="mode" value="paste"> 直接貼上文字</label>
+  </fieldset>
+  <div data-mode="file">
+    <label>LINE 匯出檔（.txt，1 MB 以內）
+      <input type="file" name="file" accept=".txt,text/plain">
+    </label>
+  </div>
+  <div data-mode="paste" hidden>
+    <label>對話文字（每行「名字：內容」）
+      <textarea name="paste" rows="10" placeholder="阿明：在嗎&#10;我：在，怎麼了？"></textarea>
+    </label>
+  </div>
+  <label>案例標題（可留空）
+    <input name="title" maxlength="100" placeholder="預設為「對話分析＋日期」">
+  </label>
+  <button type="submit" class="btn">下一步：解析對話</button>
+</form>
+{% endblock %}
+{% block scripts %}
+<script>
+  // 切換上傳／貼上；隱藏的那一種清空，避免兩者同時送出
+  document.querySelectorAll('input[name="mode"]').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      document.querySelectorAll('[data-mode]').forEach(function (box) {
+        var active = box.dataset.mode === radio.value;
+        box.hidden = !active;
+        if (!active) box.querySelectorAll('input, textarea').forEach(function (el) { el.value = ''; });
+      });
+    });
+  });
+</script>
+{% endblock %}

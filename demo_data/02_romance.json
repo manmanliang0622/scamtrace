@@ -1,0 +1,148 @@
+{
+  "title": "感情詐騙：海外工程師與包裹",
+  "self_name": "陳怡君",
+  "category": "romance",
+  "is_scam": true,
+  "scam_type": "romance",
+  "turning_point": 13,
+  "pii": [
+    {
+      "type": "phone",
+      "value": "+886 978 336 052"
+    },
+    {
+      "type": "bank_account",
+      "value": "0081234567890"
+    },
+    {
+      "type": "address",
+      "value": "台北市中山區南京東路三段200號"
+    }
+  ],
+  "messages": {
+    "1": {
+      "stage": "contact",
+      "tactics": []
+    },
+    "2": {
+      "stage": "contact",
+      "tactics": []
+    },
+    "3": {
+      "stage": "contact",
+      "tactics": []
+    },
+    "4": {
+      "stage": "contact",
+      "tactics": []
+    },
+    "5": {
+      "stage": "rapport",
+      "tactics": [
+        "liking"
+      ]
+    },
+    "6": {
+      "stage": "rapport",
+      "tactics": []
+    },
+    "7": {
+      "stage": "rapport",
+      "tactics": []
+    },
+    "8": {
+      "stage": "rapport",
+      "tactics": []
+    },
+    "9": {
+      "stage": "rapport",
+      "tactics": [
+        "liking"
+      ]
+    },
+    "10": {
+      "stage": "rapport",
+      "tactics": [
+        "liking"
+      ]
+    },
+    "11": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "12": {
+      "stage": "none",
+      "tactics": []
+    },
+    "13": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "14": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "15": {
+      "stage": "none",
+      "tactics": []
+    },
+    "16": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "17": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "18": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "19": {
+      "stage": "none",
+      "tactics": []
+    },
+    "20": {
+      "stage": "action",
+      "tactics": []
+    },
+    "21": {
+      "stage": "action",
+      "tactics": [
+        "commitment"
+      ]
+    },
+    "22": {
+      "stage": "none",
+      "tactics": []
+    },
+    "23": {
+      "stage": "action",
+      "tactics": []
+    },
+    "24": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    },
+    "25": {
+      "stage": "action",
+      "tactics": []
+    },
+    "26": {
+      "stage": "none",
+      "tactics": []
+    },
+    "27": {
+      "stage": "pressure",
+      "tactics": []
+    }
+  },
+  "source": {
+    "title": "165 全民防騙網（內政部警政署）",
+    "url": "https://165.npa.gov.tw/",
+    "retrieved": "2026-10-09"
+  },
+  "_note": "草稿：stage / tactics / turning_point 由開發者人工標註"
+}

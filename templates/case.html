@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% block title %}{{ case.title }}{% endblock %}
+{% block content %}
+<div class="case-head">
+  <div>
+    <h1>{{ case.title }}</h1>
+    <p class="muted">
+      {% if case.is_demo %}<span class="pill">自編示範資料</span>{% endif %}
+      {{ case.message_count }} 則訊息
+      {% if case.period_start %}｜{{ case.period_start }} – {{ case.period_end }}{% endif %}
+    </p>
+  </div>
+  {% if can_delete %}
+  <form method="post" action="{{ url_for('case_delete', case_id=case.id) }}" data-confirm="確定要刪除這個案例嗎？訊息、標註與回饋會一併刪除，無法復原。">
+    <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+    <button type="submit" class="btn danger">刪除案例</button>
+  </form>
+  {% endif %}
+</div>
+
+{% if case.status == 'failed' %}
+  <section class="card"><h2>分析失敗</h2><p>這段對話無法完成分析，請稍後重新上傳一次。</p></section>
+{% elif case.status == 'pending' %}
+  <section class="card"><h2>尚未分析</h2></section>
+{% else %}
+
+<section class="card summary" aria-label="分析摘要">
+  <div class="risk-badge risk-{{ case.risk_level }}">
+    <span class="risk-label">風險 {{ RISK_LEVEL_NAMES[case.risk_level] }}</span>
+    <span class="risk-score">{{ case.overall_risk }}<small>/100</small></span>
+  </div>
+  <dl class="summary-facts">
+    <div><dt>可能類型</dt><dd>{{ SCAM_TYPE_NAMES.get(scam_code, '未判斷為詐騙') if scam_code else '未判斷為詐騙' }}</dd></div>
+    <div><dt>轉折點</dt><dd>{% if case.turning_point_seq %}<a href="#msg-{{ case.turning_point_seq }}">第 {{ case.turning_point_seq }} 則</a>{% else %}無{% endif %}</dd></div>
+    <div><dt>分析方式</dt><dd>{{ '語言模型分析（' ~ case.model_name ~ '）' if case.analyzed_by == 'llm' else '規則比對' }}</dd></div>
+  </dl>
+  <p class="summary-text">{{ case.summary }}</p>
+  {% if case.analyzed_by == 'rule' %}
+    <p class="notice">本次使用規則比對，準確度較低。</p>
+  {% endif %}
+  {% if can_modify %}
+  <form method="post" action="{{ url_for('case_feedback', case_id=case.id) }}" class="overall-feedback">
+    <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+    <span>整體判斷正確嗎？</span>
+    <button name="is_correct" value="1" class="btn small secondary">正確</button>
+    <button name="is_correct" value="0" class="btn small secondary">有誤</button>
+  </form>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2>風險時間軸</h2>
+  <div class="stage-legend" aria-hidden="true">
+    {% for code, name, _d in STAGES if code != 'none' %}<span><i class="swatch stage-{{ code }}"></i>{{ name }}</span>{% endfor %}
+  </div>
+  <div id="timeline" class="timeline"
+       data-api="{{ url_for('api_timeline', case_id=case.id) }}"
+       data-turning="{{ case.turning_point_seq or '' }}"
+       role="img" aria-label="各則訊息的風險分數折線圖，背景顏色代表詐騙階段">
+    <noscript>需要啟用 JavaScript 才能顯示時間軸。</noscript>
+  </div>
+  <div id="timeline-tip" class="timeline-tip" hidden></div>
+</section>
+
+<div class="result-grid">
+  <section class="card conversation" aria-label="對話與話術標註">
+    <h2>對話與話術標註</h2>
+    <p class="muted small">點手法標籤，會在訊息中標亮判斷依據的字句。</p>
+    {% for m in messages %}
+      <article class="bubble {{ 'self' if m.is_self else 'other' }}{% if m.seq == case.turning_point_seq %} turning{% endif %}"
+               id="msg-{{ m.seq }}" data-seq="{{ m.seq }}">
+        <header class="bubble-meta">
+          <span>#{{ m.seq }} {{ m.speaker }}</span>
+          {% if m.sent_at %}<span>{{ m.sent_at }}</span>{% endif %}
+          {% if m.stage and m.stage != 'none' %}<span class="stage-chip stage-{{ m.stage }}">{{ STAGE_NAMES[m.stage] }}</span>{% endif %}
+          {% if m.risk_score %}<span>風險 {{ m.risk_score }}</span>{% endif %}
+          {% if m.seq == case.turning_point_seq %}<strong class="turning-label">轉折點</strong>{% endif %}
+        </header>
+        <p class="bubble-text{% if m.msg_type != 'text' %} non-text{% endif %}" data-text>{{ m.masked_text }}</p>
+        {% if m.tactics %}
+        <div class="tags">
+          {% for t in m.tactics %}
+            <button type="button" class="tag" style="--tag: {{ TACTIC_COLORS[t.code] }}"
+                    data-evidence="{{ t.evidence }}" title="依據：{{ t.evidence }}（信心 {{ '%.0f' % (t.confidence * 100) }}%）">
+              {{ TACTIC_NAMES[t.code] }}
+            </button>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% if can_modify and not m.is_self and m.msg_type == 'text' %}
+        <details class="fb">
+          <summary>標註有誤</summary>
+          <form method="post" action="{{ url_for('case_feedback', case_id=case.id) }}">
+            <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+            <input type="hidden" name="message_id" value="{{ m.id }}">
+            <input type="hidden" name="seq" value="{{ m.seq }}">
+            <input type="hidden" name="is_correct" value="0">
+            <label>正確的手法（可不選）
+              <select name="corrected_tactic">
+                <option value="">— 不指定 —</option>
+                {% for code, name, _en, _d, _c in TACTICS %}<option value="{{ code }}">{{ name }}</option>{% endfor %}
+              </select>
+            </label>
+            <label>說明（200 字內，可留空）
+              <textarea name="comment" maxlength="200" rows="2"></textarea>
+            </label>
+            <button type="submit" class="btn small">送出回饋</button>
+          </form>
+        </details>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </section>
+
+  <aside class="side">
+    <section class="card">
+      <h2>手法統計</h2>
+      {% if counts %}
+        {% set top = counts[0][1] %}
+        <ul class="bars">
+          {% for code, n in counts %}
+            <li>
+              <span class="bar-label">{{ TACTIC_NAMES[code] }}</span>
+              <span class="bar-track"><span class="bar" style="width: {{ (n / top * 100) | round(1) }}%; --tag: {{ TACTIC_COLORS[code] }}"></span></span>
+              <span class="bar-n">{{ n }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="muted">沒有標註到說服手法。</p>
+      {% endif %}
+    </section>
+    <section class="card">
+      <h2>去識別化</h2>
+      {% if pii %}
+        <table class="table compact">
+          {% for p in pii %}<tr><td>{{ PII_LABELS.get(p.pii_type, p.pii_type) }}</td><td class="num">{{ p.count }} 處</td></tr>{% endfor %}
+        </table>
+      {% else %}<p class="muted">沒有遮罩任何個資。</p>{% endif %}
+    </section>
+  </aside>
+</div>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='case.js') }}"></script>
+<script src="{{ url_for('static', filename='timeline.js') }}"></script>
+{% endblock %}

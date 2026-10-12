@@ -1,0 +1,340 @@
+{
+ "messages": [
+  {
+   "seq": 1,
+   "stage": "contact",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "authority",
+     "evidence": "財經頻道的",
+     "confidence": 0.7
+    }
+   ]
+  },
+  {
+   "seq": 2,
+   "stage": "contact",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 3,
+   "stage": "rapport",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "unity",
+     "evidence": "我們團隊專門幫大家解套",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "seq": 4,
+   "stage": "none",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 5,
+   "stage": "setup",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "social_proof",
+     "evidence": "上週帶的飆股，三天漲了 32%",
+     "confidence": 0.7
+    }
+   ]
+  },
+  {
+   "seq": 6,
+   "stage": "setup",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 7,
+   "stage": "setup",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "authority",
+     "evidence": "現在是證照分析師",
+     "confidence": 0.9
+    }
+   ]
+  },
+  {
+   "seq": 8,
+   "stage": "setup",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "social_proof",
+     "evidence": "群組裡大家都賺了",
+     "confidence": 0.9
+    }
+   ]
+  },
+  {
+   "seq": 9,
+   "stage": "none",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 10,
+   "stage": "rapport",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 11,
+   "stage": "rapport",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 12,
+   "stage": "rapport",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "liking",
+     "evidence": "您很有投資天分",
+     "confidence": 0.85
+    }
+   ]
+  },
+  {
+   "seq": 13,
+   "stage": "setup",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "scarcity",
+     "evidence": "平常只開放給老學員",
+     "confidence": 0.7
+    }
+   ]
+  },
+  {
+   "seq": 14,
+   "stage": "setup",
+   "requests_action": true,
+   "tactics": []
+  },
+  {
+   "seq": 15,
+   "stage": "setup",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 16,
+   "stage": "setup",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "reciprocity",
+     "evidence": "免費的",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "seq": 17,
+   "stage": "setup",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "commitment",
+     "evidence": "這幾天群組裡的單有跟到嗎",
+     "confidence": 0.5
+    }
+   ]
+  },
+  {
+   "seq": 18,
+   "stage": "setup",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 19,
+   "stage": "setup",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "scarcity",
+     "evidence": "主力準備拉抬的內線股",
+     "confidence": 0.75
+    }
+   ]
+  },
+  {
+   "seq": 20,
+   "stage": "action",
+   "requests_action": true,
+   "tactics": []
+  },
+  {
+   "seq": 21,
+   "stage": "action",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 22,
+   "stage": "action",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "unity",
+     "evidence": "我們自己人才跟你說",
+     "confidence": 0.8
+    },
+    {
+     "code": "scarcity",
+     "evidence": "一般券商買不到",
+     "confidence": 0.7
+    }
+   ]
+  },
+  {
+   "seq": 23,
+   "stage": "action",
+   "requests_action": true,
+   "tactics": [
+    {
+     "code": "scarcity",
+     "evidence": "名額只剩今天",
+     "confidence": 0.95
+    },
+    {
+     "code": "urgency_threat",
+     "evidence": "名額只剩今天",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "seq": 24,
+   "stage": "action",
+   "requests_action": true,
+   "tactics": []
+  },
+  {
+   "seq": 25,
+   "stage": "action",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 26,
+   "stage": "pressure",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "scarcity",
+     "evidence": "錯過這次就要等下一季了",
+     "confidence": 0.85
+    },
+    {
+     "code": "social_proof",
+     "evidence": "上次猶豫的學員到現在都還在後悔",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "seq": 27,
+   "stage": "pressure",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "commitment",
+     "evidence": "都說好要一起賺了，不要半途而廢",
+     "confidence": 0.9
+    }
+   ]
+  },
+  {
+   "seq": 28,
+   "stage": "action",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 29,
+   "stage": "action",
+   "requests_action": true,
+   "tactics": [
+    {
+     "code": "commitment",
+     "evidence": "晚上再補 2 萬才能拿到完整額度",
+     "confidence": 0.6
+    }
+   ]
+  },
+  {
+   "seq": 30,
+   "stage": "action",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 31,
+   "stage": "pressure",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 32,
+   "stage": "pressure",
+   "requests_action": true,
+   "tactics": [
+    {
+     "code": "authority",
+     "evidence": "這是平台規定",
+     "confidence": 0.7
+    }
+   ]
+  },
+  {
+   "seq": 33,
+   "stage": "pressure",
+   "requests_action": true,
+   "tactics": [
+    {
+     "code": "urgency_threat",
+     "evidence": "今天 12 點前沒繳，帳戶會被凍結",
+     "confidence": 0.95
+    }
+   ]
+  },
+  {
+   "seq": 34,
+   "stage": "pressure",
+   "requests_action": false,
+   "tactics": []
+  },
+  {
+   "seq": 35,
+   "stage": "pressure",
+   "requests_action": false,
+   "tactics": [
+    {
+     "code": "urgency_threat",
+     "evidence": "快點處理",
+     "confidence": 0.8
+    }
+   ]
+  }
+ ],
+ "scam_type": "investment",
+ "is_likely_scam": true,
+ "summary": "對方以分析師身分（#7）與群組獲利（#8）建立信任，引導下載不明 App（#20）並以「名額只剩今天」催促入金（#23），出金前又要求先繳保證金並威脅凍結帳戶（#32、#33），符合假投資詐騙。"
+}

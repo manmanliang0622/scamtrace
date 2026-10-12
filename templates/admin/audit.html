@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}操作日誌{% endblock %}
+{% block content %}
+<div class="case-head">
+  <h1>操作日誌</h1>
+  <a class="btn secondary" href="{{ url_for('admin_dashboard') }}">回儀表板</a>
+</div>
+<form method="get" class="filter">
+  <label>事件類型
+    <select name="action" onchange="this.form.submit()">
+      <option value="">全部</option>
+      {% for a in actions %}<option value="{{ a }}"{% if a == action %} selected{% endif %}>{{ a }}</option>{% endfor %}
+    </select>
+  </label>
+  <noscript><button type="submit" class="btn small">篩選</button></noscript>
+  <span class="muted">共 {{ total }} 筆</span>
+</form>
+<div class="table-wrap">
+<table class="table compact">
+  <thead><tr><th>時間</th><th>使用者</th><th>事件</th><th>對象</th><th>IP</th><th>細節</th></tr></thead>
+  <tbody>
+  {% for r in rows %}
+    <tr>
+      <td class="nowrap">{{ r.created_at | replace('T', ' ') }}</td>
+      <td>{{ r.username or '—' }}</td>
+      <td><code>{{ r.action }}</code></td>
+      <td>{{ r.target or '' }}</td>
+      <td>{{ r.ip or '' }}</td>
+      <td>{{ r.detail or '' }}</td>
+    </tr>
+  {% else %}
+    <tr><td colspan="6" class="muted">沒有紀錄。</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<nav class="pager" aria-label="分頁">
+  {% if page > 1 %}<a href="{{ url_for('admin_audit', action=action or None, page=page - 1) }}">‹ 上一頁</a>{% endif %}
+  <span>第 {{ page }} / {{ pages }} 頁</span>
+  {% if page < pages %}<a href="{{ url_for('admin_audit', action=action or None, page=page + 1) }}">下一頁 ›</a>{% endif %}
+</nav>
+{% endblock %}

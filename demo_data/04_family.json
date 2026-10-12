@@ -1,0 +1,130 @@
+{
+  "title": "假冒親友：換新號碼借錢",
+  "self_name": "黃淑芬",
+  "category": "impersonation_family",
+  "is_scam": true,
+  "scam_type": "impersonation_family",
+  "turning_point": 14,
+  "pii": [
+    {
+      "type": "bank_account",
+      "value": "12250987654321"
+    },
+    {
+      "type": "line_id",
+      "value": "jiawei0303"
+    }
+  ],
+  "messages": {
+    "1": {
+      "stage": "contact",
+      "tactics": []
+    },
+    "2": {
+      "stage": "none",
+      "tactics": []
+    },
+    "3": {
+      "stage": "rapport",
+      "tactics": []
+    },
+    "4": {
+      "stage": "none",
+      "tactics": []
+    },
+    "5": {
+      "stage": "rapport",
+      "tactics": []
+    },
+    "6": {
+      "stage": "none",
+      "tactics": []
+    },
+    "7": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "8": {
+      "stage": "none",
+      "tactics": []
+    },
+    "9": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "10": {
+      "stage": "none",
+      "tactics": []
+    },
+    "11": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "12": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "13": {
+      "stage": "none",
+      "tactics": []
+    },
+    "14": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "15": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "16": {
+      "stage": "action",
+      "tactics": [
+        "commitment"
+      ]
+    },
+    "17": {
+      "stage": "none",
+      "tactics": []
+    },
+    "18": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "19": {
+      "stage": "action",
+      "tactics": []
+    },
+    "20": {
+      "stage": "pressure",
+      "tactics": []
+    },
+    "21": {
+      "stage": "none",
+      "tactics": []
+    },
+    "22": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "23": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    },
+    "24": {
+      "stage": "none",
+      "tactics": []
+    },
+    "25": {
+      "stage": "pressure",
+      "tactics": []
+    }
+  },
+  "source": {
+    "title": "165 全民防騙網（內政部警政署）",
+    "url": "https://165.npa.gov.tw/",
+    "retrieved": "2026-10-09"
+  },
+  "_note": "草稿：stage / tactics / turning_point 由開發者人工標註"
+}

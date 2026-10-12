@@ -1,0 +1,140 @@
+{
+  "title": "求職詐騙：在家打工與出借帳戶",
+  "self_name": "吳承恩",
+  "category": "job",
+  "is_scam": true,
+  "scam_type": "job",
+  "turning_point": 14,
+  "pii": [
+    {
+      "type": "phone",
+      "value": "0933-871-205"
+    },
+    {
+      "type": "bank_account",
+      "value": "8221234567812"
+    },
+    {
+      "type": "email",
+      "value": "hr.service2026@quickjob-tw.com"
+    }
+  ],
+  "messages": {
+    "1": {
+      "stage": "contact",
+      "tactics": []
+    },
+    "2": {
+      "stage": "setup",
+      "tactics": [
+        "commitment"
+      ]
+    },
+    "3": {
+      "stage": "none",
+      "tactics": []
+    },
+    "4": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "5": {
+      "stage": "none",
+      "tactics": []
+    },
+    "6": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "7": {
+      "stage": "none",
+      "tactics": []
+    },
+    "8": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "9": {
+      "stage": "none",
+      "tactics": []
+    },
+    "10": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "11": {
+      "stage": "none",
+      "tactics": []
+    },
+    "12": {
+      "stage": "setup",
+      "tactics": [
+        "social_proof"
+      ]
+    },
+    "13": {
+      "stage": "none",
+      "tactics": []
+    },
+    "14": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "15": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "16": {
+      "stage": "none",
+      "tactics": []
+    },
+    "17": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "18": {
+      "stage": "setup",
+      "tactics": [
+        "scarcity"
+      ]
+    },
+    "19": {
+      "stage": "action",
+      "tactics": []
+    },
+    "20": {
+      "stage": "action",
+      "tactics": []
+    },
+    "21": {
+      "stage": "none",
+      "tactics": []
+    },
+    "22": {
+      "stage": "action",
+      "tactics": []
+    },
+    "23": {
+      "stage": "none",
+      "tactics": []
+    },
+    "24": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    },
+    "25": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    }
+  },
+  "source": {
+    "title": "165 全民防騙網（內政部警政署）",
+    "url": "https://165.npa.gov.tw/",
+    "retrieved": "2026-10-09"
+  },
+  "_note": "草稿：stage / tactics / turning_point 由開發者人工標註"
+}

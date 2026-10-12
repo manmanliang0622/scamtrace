@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}去識別化預覽{% endblock %}
+{% macro masked(text) -%}
+  {#- 代號以灰底標示：逐段輸出，全部經自動跳脫 -#}
+  {%- for part in text | split_codes -%}
+    {%- if part.code %}<span class="code">{{ part.text }}</span>{% else %}{{ part.text }}{% endif -%}
+  {%- endfor -%}
+{%- endmacro %}
+{% block content %}
+<h1>去識別化預覽</h1>
+<p class="muted">以下是即將送出分析的內容。灰底文字是系統換上的代號。若還有人名等個資沒被遮住，請選取該文字後按「遮罩選取文字」。
+此預覽 30 分鐘內有效。</p>
+
+<div class="preview-layout">
+  <section class="card preview-text" id="preview-text" aria-label="遮罩後全文">
+    {% for m in data.messages %}
+      <div class="pv-line{% if m.is_self %} self{% endif %}">
+        <span class="pv-meta">#{{ m.seq }} {{ m.sent_at or '' }} {{ m.speaker }}</span>
+        <span class="pv-body">{{ masked(m.text) }}</span>
+      </div>
+    {% endfor %}
+  </section>
+
+  <aside class="preview-side">
+    <section class="card">
+      <h2>遮罩統計</h2>
+      {% if data.pii_counts %}
+        <table class="table compact">
+          {% for k, v in data.pii_counts | dictsort %}
+            <tr><td>{{ PII_LABELS.get(k, k) }}</td><td class="num">{{ v }} 處</td></tr>
+          {% endfor %}
+        </table>
+      {% else %}
+        <p class="muted">沒有偵測到電話、帳號等個資。</p>
+      {% endif %}
+      <p class="muted small">金額與網址的網域會保留，因為它們是判斷詐騙的線索。</p>
+    </section>
+
+    <form method="post" action="{{ url_for('case_mask', token=token) }}" class="card" id="mask-form">
+      <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+      <h2>手動補遮</h2>
+      <label>要遮罩的文字
+        <input name="fragment" id="fragment" maxlength="100" placeholder="在左側選取文字，或直接輸入">
+      </label>
+      <button type="submit" class="btn secondary">遮罩選取文字</button>
+    </form>
+
+    <form method="post" action="{{ url_for('case_confirm', token=token) }}" class="card" id="confirm-form">
+      <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+      <label>案例標題
+        <input name="title" maxlength="100" value="{{ data.title }}">
+      </label>
+      <label class="check"><input type="checkbox" name="confirm" value="yes" required> 我確認內容已去識別化</label>
+      <button type="submit" class="btn" id="confirm-btn">送出分析</button>
+      <p class="muted small" id="analyzing" hidden>分析中，長對話可能需要一到數分鐘，請勿關閉頁面…</p>
+    </form>
+  </aside>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='preview.js') }}"></script>{% endblock %}

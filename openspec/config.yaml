@@ -1,0 +1,53 @@
+schema: spec-driven
+
+context: |
+  Language: zh-TW
+  All artifacts must be written in zh-TW.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+
+  ## 專案
+  詐騙對話話術分析系統（英文代號 ScamTrace），作者梁曼璇，作為書審「03 著作作品」。
+  原始規格書：專案根目錄 SPEC.md（v1.0，2026-10-09）。開發時以 openspec/ 規格為準。
+  使用者上傳 LINE 匯出聊天紀錄 → 本機去識別化 → 以 Cialdini 影響力原則逐則標註話術、
+  判斷詐騙階段與類型 → 風險時間軸與轉折點 → 後台統計與回饋正確率。
+
+  ## 範圍外
+  - 不即時攔截訊息、不串接 LINE 官方 API（只處理使用者自行匯出的檔案）
+  - 不查詢電話或網址黑名單
+  - 不提供法律判定；一律提示「若有疑慮請撥打 165 反詐騙專線」
+
+  ## 角色
+  訪客（首頁、示範案例）、user（上傳、分析、看與刪自己的案例、回饋）、
+  admin（user 全部功能＋統計儀表板、操作日誌、管理示範案例）
+
+  ## 技術選型
+  - Python 3.12 以上（本機 3.14）、Flask 3.x、Jinja2 自動跳脫、SQLite 3（instance/scam.db）
+  - 密碼雜湊：Werkzeug generate_password_hash（scrypt）
+  - 語言模型：Anthropic Python SDK，模型 claude-opus-5-5，只接收去識別化後文字
+  - 前端：HTML＋CSS＋原生 JavaScript，不用前端框架；時間軸以 SVG 自繪，不依賴外部圖表庫
+  - 套件：venv＋requirements.txt（flask>=3.0、anthropic）
+  - SECRET_KEY 與 API 憑證從環境變數讀取；.gitignore 排除 instance/ 與 .env
+
+  ## 目錄結構
+  app.py（路由）、config.py、db.py、schema.sql、seed.py、auth.py、parser.py、deidentify.py、
+  analyzer.py、risk.py、stats.py、evaluate.py、lexicon/（關鍵詞 JSON）、demo_data/（自編對話與人工標註）、
+  templates/、static/（style.css、timeline.js、preview.js）、tests/、instance/（不進版控）、README.md
+
+  ## 排程（2026/10/9–10/11）
+  10/9 資料庫、登入註冊、parser、deidentify、單元測試 → 上傳後能看到正確遮罩預覽
+  10/10 上午 analyzer、risk、結果頁；下午 時間軸 SVG、標籤標亮、回饋、我的案例
+  10/11 上午 示範資料 8 段＋人工標註、evaluate.py、後台、操作日誌；下午 截圖、ER 圖、作品頁
+  時間不夠依序砍：手動補遮 → 後台組合統計 → 長對話切段（改限制 150 則）→ 回饋功能。
+  核心不能砍：去識別化、話術標註、時間軸。
+
+  ## 已知限制
+  LINE 匯出格式隨版本改變；去識別化以規則為主，第三人姓名與暗語化帳號（「零九一二」）可能漏遮；
+  話術判斷依賴語言模型可能誤判，系統定位為輔助理解；示範資料自編、樣本小，只能說明初步可行性。
+
+  ## 寫作注意
+  作品說明寫「常見工具多以單則訊息查證為主」，不要寫「市面上沒有」。評估結論寫成「初步測試」。
+  參考資料：Cialdini (2021) Influence, new and expanded（Unity 為本版新增）；165 全民防騙網（附網址與擷取日期）。
+
+rules:
+  tasks:
+    - 依 SPEC.md §15 的日期分組，可砍項目標註可砍順位

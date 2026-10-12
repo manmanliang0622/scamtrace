@@ -1,0 +1,132 @@
+{
+  "title": "網購解除分期：假客服來電",
+  "self_name": "張家豪",
+  "category": "shopping",
+  "is_scam": true,
+  "scam_type": "shopping",
+  "turning_point": 12,
+  "pii": [
+    {
+      "type": "phone",
+      "value": "02-27756431"
+    },
+    {
+      "type": "bank_account",
+      "value": "7001234598760"
+    },
+    {
+      "type": "id_number",
+      "value": "F128765432"
+    }
+  ],
+  "messages": {
+    "1": {
+      "stage": "contact",
+      "tactics": []
+    },
+    "2": {
+      "stage": "contact",
+      "tactics": []
+    },
+    "3": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "4": {
+      "stage": "none",
+      "tactics": []
+    },
+    "5": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "6": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "7": {
+      "stage": "none",
+      "tactics": []
+    },
+    "8": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "9": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "10": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "11": {
+      "stage": "none",
+      "tactics": []
+    },
+    "12": {
+      "stage": "action",
+      "tactics": []
+    },
+    "13": {
+      "stage": "action",
+      "tactics": []
+    },
+    "14": {
+      "stage": "none",
+      "tactics": []
+    },
+    "15": {
+      "stage": "action",
+      "tactics": []
+    },
+    "16": {
+      "stage": "action",
+      "tactics": []
+    },
+    "17": {
+      "stage": "none",
+      "tactics": []
+    },
+    "18": {
+      "stage": "pressure",
+      "tactics": []
+    },
+    "19": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    },
+    "20": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    },
+    "21": {
+      "stage": "none",
+      "tactics": []
+    },
+    "22": {
+      "stage": "pressure",
+      "tactics": []
+    },
+    "23": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    },
+    "24": {
+      "stage": "none",
+      "tactics": []
+    }
+  },
+  "source": {
+    "title": "165 全民防騙網（內政部警政署）",
+    "url": "https://165.npa.gov.tw/",
+    "retrieved": "2026-10-09"
+  },
+  "_note": "草稿：stage / tactics / turning_point 由開發者人工標註"
+}

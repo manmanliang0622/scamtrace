@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}註冊{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h1>註冊</h1>
+  <form method="post">
+    <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+    <label>帳號
+      <input name="username" value="{{ username }}" autocomplete="username"
+             pattern="[A-Za-z0-9_]{4,30}" required>
+      <small class="muted">4–30 個字元，英文字母、數字與底線</small>
+    </label>
+    <label>密碼
+      <input name="password" type="password" autocomplete="new-password" minlength="8" required>
+      <small class="muted">至少 8 碼，需同時包含英文字母與數字</small>
+    </label>
+    <button type="submit" class="btn">註冊</button>
+  </form>
+  <p class="muted">已有帳號？<a href="{{ url_for('auth.login') }}">登入</a></p>
+</section>
+{% endblock %}

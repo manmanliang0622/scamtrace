@@ -1,0 +1,14 @@
+{# 示範案例卡片；需要變數 demos #}
+<div class="demo-grid">
+  {% for c in demos %}
+    <a class="card demo-card" href="{{ url_for('case_detail', case_id=c.id) }}">
+      <span class="pill">自編示範資料</span>
+      <h3>{{ c.title }}</h3>
+      <p class="muted">{{ c.message_count }} 則訊息
+        {% if c.scam_code %}｜{{ SCAM_TYPE_NAMES.get(c.scam_code) }}{% endif %}</p>
+      {% if c.risk_level %}<span class="level level-{{ c.risk_level }}">風險 {{ RISK_LEVEL_NAMES[c.risk_level] }}・{{ c.overall_risk }}</span>{% endif %}
+    </a>
+  {% else %}
+    <p class="muted">目前沒有示範案例。</p>
+  {% endfor %}
+</div>

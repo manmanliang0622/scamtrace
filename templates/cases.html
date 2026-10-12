@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}我的案例{% endblock %}
+{% block content %}
+<div class="case-head">
+  <h1>我的案例</h1>
+  <a class="btn" href="{{ url_for('case_new') }}">上傳新對話</a>
+</div>
+{% if cases %}
+<div class="table-wrap">
+<table class="table">
+  <thead><tr><th>標題</th><th>對話期間</th><th class="num">訊息數</th><th>風險</th><th>類型</th><th>建立時間</th><th></th></tr></thead>
+  <tbody>
+  {% for c in cases %}
+    <tr>
+      <td><a href="{{ url_for('case_detail', case_id=c.id) }}">{{ c.title }}</a></td>
+      <td class="nowrap">{{ (c.period_start or '')[:10] }}{% if c.period_end and c.period_end[:10] != (c.period_start or '')[:10] %} – {{ c.period_end[:10] }}{% endif %}</td>
+      <td class="num">{{ c.message_count }}</td>
+      <td>{% if c.risk_level %}<span class="level level-{{ c.risk_level }}">{{ RISK_LEVEL_NAMES[c.risk_level] }}</span>{% elif c.status == 'failed' %}失敗{% else %}—{% endif %}</td>
+      <td>{{ SCAM_TYPE_NAMES.get(c.scam_code, '—') if c.scam_code else '—' }}</td>
+      <td class="nowrap">{{ c.created_at[:16] | replace('T', ' ') }}</td>
+      <td>
+        <form method="post" action="{{ url_for('case_delete', case_id=c.id) }}" data-confirm="確定要刪除「{{ c.title }}」嗎？無法復原。">
+          <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+          <button type="submit" class="linklike danger-text">刪除</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+  <section class="card"><p>還沒有案例。<a href="{{ url_for('case_new') }}">上傳一段對話</a>開始分析。</p></section>
+{% endif %}
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='case.js') }}"></script>{% endblock %}

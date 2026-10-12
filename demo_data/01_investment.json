@@ -1,0 +1,194 @@
+{
+  "title": "假投資：飆股老師帶單",
+  "self_name": "林雅婷",
+  "category": "investment",
+  "is_scam": true,
+  "scam_type": "investment",
+  "turning_point": 19,
+  "pii": [
+    {
+      "type": "phone",
+      "value": "0965-218-437"
+    },
+    {
+      "type": "bank_account",
+      "value": "80217739461520"
+    },
+    {
+      "type": "line_id",
+      "value": "stock_wang888"
+    }
+  ],
+  "messages": {
+    "1": {
+      "stage": "contact",
+      "tactics": []
+    },
+    "2": {
+      "stage": "contact",
+      "tactics": []
+    },
+    "3": {
+      "stage": "rapport",
+      "tactics": [
+        "reciprocity",
+        "unity"
+      ]
+    },
+    "4": {
+      "stage": "none",
+      "tactics": []
+    },
+    "5": {
+      "stage": "setup",
+      "tactics": [
+        "reciprocity"
+      ]
+    },
+    "6": {
+      "stage": "none",
+      "tactics": []
+    },
+    "7": {
+      "stage": "setup",
+      "tactics": [
+        "authority"
+      ]
+    },
+    "8": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "9": {
+      "stage": "none",
+      "tactics": []
+    },
+    "10": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "11": {
+      "stage": "none",
+      "tactics": []
+    },
+    "12": {
+      "stage": "rapport",
+      "tactics": []
+    },
+    "13": {
+      "stage": "setup",
+      "tactics": [
+        "scarcity"
+      ]
+    },
+    "14": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "15": {
+      "stage": "none",
+      "tactics": []
+    },
+    "16": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "17": {
+      "stage": "setup",
+      "tactics": []
+    },
+    "18": {
+      "stage": "none",
+      "tactics": []
+    },
+    "19": {
+      "stage": "setup",
+      "tactics": [
+        "scarcity"
+      ]
+    },
+    "20": {
+      "stage": "action",
+      "tactics": []
+    },
+    "21": {
+      "stage": "none",
+      "tactics": []
+    },
+    "22": {
+      "stage": "setup",
+      "tactics": [
+        "scarcity",
+        "reciprocity"
+      ]
+    },
+    "23": {
+      "stage": "action",
+      "tactics": [
+        "scarcity"
+      ]
+    },
+    "24": {
+      "stage": "action",
+      "tactics": []
+    },
+    "25": {
+      "stage": "none",
+      "tactics": []
+    },
+    "26": {
+      "stage": "pressure",
+      "tactics": [
+        "social_proof"
+      ]
+    },
+    "27": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    },
+    "28": {
+      "stage": "none",
+      "tactics": []
+    },
+    "29": {
+      "stage": "pressure",
+      "tactics": []
+    },
+    "30": {
+      "stage": "none",
+      "tactics": []
+    },
+    "31": {
+      "stage": "none",
+      "tactics": []
+    },
+    "32": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    },
+    "33": {
+      "stage": "pressure",
+      "tactics": []
+    },
+    "34": {
+      "stage": "none",
+      "tactics": []
+    },
+    "35": {
+      "stage": "pressure",
+      "tactics": [
+        "urgency_threat"
+      ]
+    }
+  },
+  "source": {
+    "title": "165 全民防騙網（內政部警政署）",
+    "url": "https://165.npa.gov.tw/",
+    "retrieved": "2026-10-09"
+  },
+  "_note": "草稿：stage / tactics / turning_point 由開發者人工標註"
+}
